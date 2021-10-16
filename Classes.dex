@@ -1,0 +1,32 @@
+val channelId = 1234L
+val params = RestAPIParams.Message(
+    "hello", // Content
+    NonceGenerator.computeNonce(ClockFactory.get()).toString(), // Nonce
+    null, // ApplicationId
+    null, // Activity
+    emptyList(), // stickerIds
+    null, // messageReference
+    RestAPIParams.Message.AllowedMentions( // https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mentions-structure
+        emptyList(), // parse
+        emptyList(), //users
+        emptyList(), // roles
+        false // repliedUser
+    )
+)
+
+val observable = RestAPI.api.sendMessage(channelId, params)
+
+// Need to subscribe or the request won't be fired
+observable.subscribe(object: Subscriber<com.discord.api.message.Message>() {
+    override fun onCompleted() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onError(th: Throwable) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onNext(msg: com.discord.api.message.Message) {
+        TODO("Not yet implemented")
+    }
+})
